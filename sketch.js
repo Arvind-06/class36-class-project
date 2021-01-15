@@ -1,11 +1,21 @@
 var hypnoticBall, database;
 var position;
 
+var gameState=0;
+var playerCount;
+var form,player,game;
+
+
 
 function setup(){
   database = firebase.database();
   console.log(database);
   createCanvas(500,500);
+
+  game = new Game();
+  game.getState();
+  game.start();
+  
 
   hypnoticBall = createSprite(250,250,10,10);
   hypnoticBall.shapeColor = "red";
@@ -16,7 +26,9 @@ function setup(){
 }
 
 function draw(){
-  background("white");
+  background("black");
+  if(position!==undefined){
+    
   
     if(keyDown(LEFT_ARROW)){
       writePosition(-1,0);
@@ -32,6 +44,7 @@ function draw(){
     }
     drawSprites();
   
+}
 }
 
 function writePosition(x,y){
